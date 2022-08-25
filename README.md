@@ -5,7 +5,7 @@
 
 ## Usage
 
-```
+```JavaScript
 import { Overpass } from "https://code4fukui.github.io/Overpass/Overpass.js";
 
 const ne = { lat: 35.95, lng: 136.19 }; // 地図右上
