@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>鯖江自販機マップ by OSM Overpass</title>
+</head><body>
+
+<h1>鯖江自販機マップ by OSM Overpass</h1>
+<div id="divmap" style="height:80vh"></div>
+<div id="credit">
+  LIB: <a href=https://github.com/code4fukui/Overpass/>Overpass.js</a><br>
+  APP: <a href=https://github.com/code4fukui/jihanki/>自販機オープンデータを集めよう</a><br>
+</div>
+
+<script type="module">
+import { LeafletGSI } from "https://js.sabae.cc/LeafletGSI.js";
+import { Overpass } from "./Overpass.js";
+
+const map = await LeafletGSI.initMap("divmap");
+
+// 鯖江
+const ne = { lat: 35.99, lng: 136.30 }; // 地図右上
+const sw = { lat: 35.84, lng: 136.07 }; // 地図左下
+const bbox = [ne, sw];
+
+// めがねストリート
+//const ne = { lat: 35.95, lng: 136.19 }; // 地図右上
+//const sw = { lat: 35.93, lng: 136.15 }; // 地図左下
+//const bbox = [ne, sw];
+const res = await Overpass.queryNode(bbox, { amenity: "vending_machine" });
+console.log(JSON.stringify(res, null, 2));
+
+const node2html = (node) => {
+  const res = ["<table>"];
+  for (const name in node) {
+    const v = node[name];
+    if (Array.isArray(v)) {
+      for (const tag of v) {
+        res.push(`<tr><th>${tag.k}: </th><td>${tag.v}</td></tr>`);
+      }
+    } else if (typeof v == "object") {
+      res.push(`<tr><th>${v.k}: </th><td>${v.v}</td></tr>`);
+    } else if (v.startsWith("https://")) {
+      res.push(`<tr><th>${name}: </th><td><a href=${v}>${v}</a></td></tr>`);
+    } else {
+      if (name == "user") {
+        res.push(`<tr><th>${name}: </th><td><a target=_blank href=https://www.openstreetmap.org/user/${v}>${v}</a></td></tr>`);
+      } else if (name == "id") {
+        res.push(`<tr><th>${name}: </th><td><a target=_blank href=https://www.openstreetmap.org/node/${v}>${v}</a></td></tr>`);
+      } else {
+        res.push(`<tr><th>${name}: </th><td>${v}</td></tr>`);
+      }
+    }
+  }
+  res.push("</table>");
+  return res.join("");
+};
+
+const lls = [];
+for (const node of res.osm.node) {
+  const pos = [node.lat, node.lon];
+  const color = "red";
+  const marker = L.marker(pos, { icon: L.spriteIcon(color)});
+  marker.bindPopup(`<b>自販機</b><br>${node2html(node)}`);
+  marker.addTo(map);
+  lls.push(pos);
+}
+if (lls.length == 0) {
+  map.setView([35.9565, 136.1842], 5);
+  err.textContent = "データがありませんでした";
+} else {
+  map.fitBounds(lls);
+}
+
+</script>
+</body>
+</html>
