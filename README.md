@@ -1,6 +1,7 @@
 # Overpass.js
 
-- A JavaScript ES module for Overpass API
+- A JavaScript ES module for OSM Overpass API
+- オープンストリートマップ(OSM)のAPI、Overpass用のJavaScript ESモジュール
 - https://wiki.openstreetmap.org/wiki/JA:Overpass_API
 
 ## Usage
