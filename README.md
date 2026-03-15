@@ -1,18 +1,17 @@
 # Overpass.js
 
-A JavaScript ES module for OSM Overpass API.
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
+
+A JavaScript ES module for querying the OpenStreetMap (OSM) Overpass API.
 
 ## Demo
-
 [Saba-e Vending Machine Map](https://code4fukui.github.io/Overpass/)
 
 ## Features
-
-- A JavaScript ES module for querying the OpenStreetMap (OSM) Overpass API
 - Provides a simple interface to fetch node data matching specified criteria within a bounding box
+- Supports querying the OSM Overpass API
 
 ## Requirements
-
 - [XML.js](https://github.com/code4fukui/XML) dependency
 
 ## Usage
@@ -28,5 +27,4 @@ console.log(JSON.stringify(res, null, 2));
 ```
 
 ## License
-
 MIT License
