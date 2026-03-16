@@ -1,13 +1,13 @@
 # Overpass.js
 
-Overpass.jsは、オープンストリートマップ(OSM)のOverpass APIを使用するためのJavaScript ESモジュールです。
+Overpass.jsは、オープンストリートマップ(OSM)のOverpass APIを使用するためのJavaScript ESモジュールです。Overpass APIを介してOSMのデータを取得し、地理空間データの検索や抽出ができます。
 
 ## デモ
-- [鯖江自販機マップ](https://code4fukui.github.io/Overpass/)
+[鯖江自販機マップ](https://code4fukui.github.io/Overpass/)
 
 ## 機能
-- OSMのOverpass APIを使ってデータを取得できる
-- 地理空間データの検索や抽出が可能
+- Overpass APIを使ってOSMのデータを取得できる
+- 地物のノードデータを条件検索できる
 
 ## 必要環境
 - [XML.js](https://github.com/code4fukui/XML)

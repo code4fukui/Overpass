@@ -27,4 +27,4 @@ console.log(JSON.stringify(res, null, 2));
 ```
 
 ## License
-MIT License
+MIT License — see [LICENSE](LICENSE).
